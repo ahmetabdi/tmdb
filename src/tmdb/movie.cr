@@ -42,11 +42,11 @@ class Tmdb::Movie
   end
 
   def self.upcoming
-    Tmdb::Requester.get("movie/upcoming").body
+    build_resource_collection(Tmdb::Requester.get("movie/upcoming").body)
   end
 
   def self.now_playing
-    Tmdb::Requester.get("movie/now_playing").body
+    build_resource_collection(Tmdb::Requester.get("movie/now_playing").body)
   end
 
   def self.popular
@@ -54,7 +54,7 @@ class Tmdb::Movie
   end
 
   def self.top_rated
-    Tmdb::Requester.get("movie/top_rated").body
+    build_resource_collection(Tmdb::Requester.get("movie/top_rated").body)
   end
 
 end

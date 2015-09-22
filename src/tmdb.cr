@@ -1,6 +1,6 @@
-require "./tmdb/*"
 require "http/client"
 require "json"
+require "./tmdb/*"
 
 module Tmdb
   def self.connect(api_key)
@@ -11,4 +11,4 @@ module Tmdb
 end
 
 Tmdb.connect("8a221fc31fcdf12a8af827465574ffc9")
-puts Tmdb::Movie.popular.inspect
+puts Tmdb::Movie.top_rated.inspect
