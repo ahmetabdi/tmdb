@@ -1,40 +1,5 @@
 require "json"
 
-class Tmdb::Genre
-  json_mapping({
-    id: Int32,
-    name: String
-  })
-end
-
-class Tmdb::ProductionCompany
-  json_mapping({
-    id: Int32,
-    name: String
-  })
-end
-class Tmdb::ProductionCountry
-  json_mapping({
-    iso_3166_1: String,
-    name: String
-  })
-end
-class Tmdb::Language
-  json_mapping({
-    iso_639_1: String,
-    name: String
-  })
-end
-
-class Tmdb::MovieCollection
-  json_mapping({
-    page: Int32,
-    results: Array(Tmdb::Movie),
-    total_pages: Int32,
-    total_results: Int32
-  })
-end
-
 class Tmdb::Movie
 
   json_mapping({
