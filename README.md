@@ -1,8 +1,6 @@
 # tmdb
 
-
 ## Installation
-
 
 Add this to your application's `shard.yml`:
 
@@ -12,7 +10,6 @@ dependencies:
     github: ahmetabdi/tmdb
 ```
 
-
 ## Usage
 
 
@@ -20,10 +17,7 @@ dependencies:
 require "tmdb"
 ```
 
-
-
 ## Development
-
 
 ## Contributing
 
