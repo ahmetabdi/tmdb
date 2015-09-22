@@ -2,7 +2,7 @@ class Tmdb::Requester
 
   def self.get(action, params = {} of Symbol => String)
     url = api.url_for(action, params)
-    HTTP::Client.get(url, headers: headers)
+    HTTP::Client.get(url, headers: headers).body
   end
 
   private def self.api

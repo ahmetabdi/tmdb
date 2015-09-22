@@ -1,5 +1,3 @@
-require "json"
-
 class Tmdb::Movie
 
   json_mapping({
@@ -38,23 +36,23 @@ class Tmdb::Movie
   end
 
   def self.latest
-    build_single_resource(Tmdb::Requester.get("movie/latest").body)
+    build_single_resource(Tmdb::Requester.get("movie/latest"))
   end
 
   def self.upcoming
-    build_resource_collection(Tmdb::Requester.get("movie/upcoming").body)
+    build_resource_collection(Tmdb::Requester.get("movie/upcoming"))
   end
 
   def self.now_playing
-    build_resource_collection(Tmdb::Requester.get("movie/now_playing").body)
+    build_resource_collection(Tmdb::Requester.get("movie/now_playing"))
   end
 
   def self.popular
-    build_resource_collection(Tmdb::Requester.get("movie/popular").body)
+    build_resource_collection(Tmdb::Requester.get("movie/popular"))
   end
 
   def self.top_rated
-    build_resource_collection(Tmdb::Requester.get("movie/top_rated").body)
+    build_resource_collection(Tmdb::Requester.get("movie/top_rated"))
   end
 
 end
