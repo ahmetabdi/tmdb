@@ -1,14 +1,19 @@
 class Tmdb::Api
   INSTANCE = new
-  getter api_key, base_url, version
+  getter api_key, base_url, version, language
 
   def initialize
     @base_url = "https://api.themoviedb.org/3/"
     @version  = 3
+    @language = "en"
   end
 
   def self.instance
     INSTANCE
+  end
+
+  def language(iso_639_1 : String)
+    @language = iso_639_1
   end
 
   def connect(api_key : String)
@@ -18,6 +23,7 @@ class Tmdb::Api
   def url_for(action, params)
     built_params = CGI.build_form do |form|
       form.add "api_key", "#{INSTANCE.api_key}"
+      form.add "language", params[:language]
     end
 
     uri = URI.parse(@base_url + action)

@@ -1,4 +1,4 @@
-class Tmdb::Movie
+class Tmdb::Movie < Tmdb::Resource
 
   json_mapping({
     id: Int32,
@@ -39,20 +39,20 @@ class Tmdb::Movie
     build_single_resource(Tmdb::Requester.get("movie/latest"))
   end
 
-  def self.upcoming
-    build_resource_collection(Tmdb::Requester.get("movie/upcoming"))
+  def self.now_playing(language = api.language)
+    build_resource_collection(Tmdb::Requester.get("movie/now_playing", { language: language }))
   end
 
-  def self.now_playing
-    build_resource_collection(Tmdb::Requester.get("movie/now_playing"))
+  def self.popular(language = api.language)
+    build_resource_collection(Tmdb::Requester.get("movie/popular", { language: language }))
   end
 
-  def self.popular
-    build_resource_collection(Tmdb::Requester.get("movie/popular"))
+  def self.top_rated(language = api.language)
+    build_resource_collection(Tmdb::Requester.get("movie/top_rated", { language: language }))
   end
 
-  def self.top_rated
-    build_resource_collection(Tmdb::Requester.get("movie/top_rated"))
+  def self.upcoming(language = api.language)
+    build_resource_collection(Tmdb::Requester.get("movie/upcoming", { language: language }))
   end
 
 end
