@@ -23,8 +23,9 @@ class Tmdb::Api
   def url_for(action, params)
     built_params = CGI.build_form do |form|
       form.add "api_key", INSTANCE.api_key
-      form.add "page", params[:page] if params[:page]
-      form.add "language", params[:language] if params[:language]
+      params.each do |k,v|
+        form.add "#{k}", "#{v}" unless v
+      end
     end
 
     uri = URI.parse(@base_url + action)

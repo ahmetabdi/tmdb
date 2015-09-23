@@ -24,64 +24,103 @@ class Tmdb::Movie < Tmdb::Resource
     genres: { type: Array(Tmdb::Genre), nilable: true },
     production_companies: { type: Array(Tmdb::ProductionCompany), nilable: true },
     production_countries: { type: Array(Tmdb::ProductionCountry), nilable: true },
-    spoken_languages: { type: Array(Tmdb::Language), nilable: true }
+    spoken_languages: { type: Array(Tmdb::Language), nilable: true },
+    keywords: { type: Tmdb::KeywordCollection, nilable: true }
   })
 
-  def self.find(id, language = api.language)
-    Tmdb::Movie.from_json((Tmdb::Requester.get("movie/#{id}", { language: language })))
+  def self.find(id, language = api.language, append_to_response = "")
+    Tmdb::Movie.from_json(
+      Tmdb::Requester.get("movie/#{id}",
+        { language: language, append_to_response: append_to_response })
+    )
   end
 
+  # TODO
   def account_states(session_id)
     Tmdb::Requester.get("movie/#{id}/account_states")
   end
 
-  def alternative_titles(country, append_to_response = "")
-    Tmdb::Requester.get("movie/#{id}/alternative_titles")
+  def alternative_titles(country = "", append_to_response = "")
+    Tmdb::TitleCollection.from_json(
+      Tmdb::Requester.get("movie/#{id}/alternative_titles",
+        { country: country, append_to_response: append_to_response })
+    )
   end
 
   def credits(append_to_response = "")
-    Tmdb::CastCollection.from_json(Tmdb::Requester.get("movie/#{id}/credits"))
+    Tmdb::CastCollection.from_json(
+      Tmdb::Requester.get("movie/#{id}/credits",
+        { append_to_response: append_to_response })
+    )
   end
 
   def images(language = api.language, append_to_response = "", include_image_language = "")
-    Tmdb::Requester.get("movie/#{id}/images")
+    Tmdb::ImageCollection.from_json(
+      Tmdb::Requester.get("movie/#{id}/images",
+        { language: language, append_to_response: append_to_response,
+          include_image_language: include_image_language })
+    )
   end
 
   def keywords(append_to_response = "")
-    Tmdb::Requester.get("movie/#{id}/keywords")
+    Tmdb::KeywordCollection.from_json(
+      Tmdb::Requester.get("movie/#{id}/keywords",
+        { append_to_response: append_to_response })
+    ).keywords
   end
 
   def releases(append_to_response = "")
-    Tmdb::Requester.get("movie/#{id}/releases")
+    Tmdb::ReleaseCollection.from_json(
+      Tmdb::Requester.get("movie/#{id}/releases",
+        { append_to_response: append_to_response })
+    ).countries
   end
 
   def videos(language = api.language, append_to_response = "")
-    Tmdb::Requester.get("movie/#{id}/videos")
+    Tmdb::VideoCollection.from_json(
+      Tmdb::Requester.get("movie/#{id}/videos",
+        { language: language, append_to_response: append_to_response })
+    ).results
   end
 
   def translations(append_to_response = "")
-    Tmdb::Requester.get("movie/#{id}/translations")
+    Tmdb::TranslationCollection.from_json(
+      Tmdb::Requester.get("movie/#{id}/translations",
+        { append_to_response: append_to_response })
+    ).translations
   end
 
   def similar(page = 1, language = api.language, append_to_response = "")
-    Tmdb::Requester.get("movie/#{id}/similar")
+    Tmdb::MovieCollection.from_json(
+      Tmdb::Requester.get("movie/#{id}/similar",
+        { page: page.to_s, language: language, append_to_response: append_to_response })
+    ).results
   end
 
   def reviews(page = 1, language = api.language, append_to_response = "")
-    Tmdb::Requester.get("movie/#{id}/reviews")
+    Tmdb::ReviewCollection.from_json(
+      Tmdb::Requester.get("movie/#{id}/reviews",
+        { page: page.to_s, language: language, append_to_response: append_to_response })
+    )
   end
 
   def lists(page = 1, language = api.language, append_to_response = "")
-    Tmdb::Requester.get("movie/#{id}/lists")
+    Tmdb::ListCollection.from_json(
+      Tmdb::Requester.get("movie/#{id}/lists",
+        { page: page.to_s, language: language, append_to_response: append_to_response })
+    )
   end
 
-  def changes(start_date = Date.today.year, end_date = Date.today)
-    Tmdb::Requester.get("movie/#{id}/changes")
+  def changes(start_date = Time.now.at_beginning_of_year.to_s("%Y-%m-%d"), end_date = Time.now.at_end_of_year.to_s("%Y-%m-%d"))
+    Tmdb::ChangeCollection.from_json(
+      Tmdb::Requester.get("movie/#{id}/changes",
+        { start_date: start_date, end_date: end_date })
+    )
   end
 
-  # def rating(session_id = nil, guest_session_id = nil)
-    # Tmdb::Requester.get("movie/#{id}/rating")
-  # end
+  def rating(session_id = nil, guest_session_id = nil)
+    Tmdb::Requester.get("movie/#{id}/rating")
+  end
 
   def self.latest
     Tmdb::Movie.from_json(Tmdb::Requester.get("movie/latest"))
