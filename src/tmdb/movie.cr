@@ -79,7 +79,7 @@ class Tmdb::Movie < Tmdb::Resource
     Tmdb::Requester.get("movie/#{id}/changes")
   end
 
-  # def rating(session_id: nil, guest_session_id: nil)
+  # def rating(session_id = nil, guest_session_id = nil)
     # Tmdb::Requester.get("movie/#{id}/rating")
   # end
 
@@ -87,20 +87,20 @@ class Tmdb::Movie < Tmdb::Resource
     Tmdb::Movie.from_json(Tmdb::Requester.get("movie/latest"))
   end
 
-  def self.now_playing(language = api.language)
-    Tmdb::MovieCollection.from_json(Tmdb::Requester.get("movie/now_playing", { language: language }))
+  def self.now_playing(page = 1, language = api.language)
+    Tmdb::MovieCollection.from_json(Tmdb::Requester.get("movie/now_playing", { page: page.to_s, language: language }))
   end
 
-  def self.popular(language = api.language)
-    Tmdb::MovieCollection.from_json(Tmdb::Requester.get("movie/popular", { language: language }))
+  def self.popular(page = 1, language = api.language)
+    Tmdb::MovieCollection.from_json(Tmdb::Requester.get("movie/popular", { page: page.to_s, language: language }))
   end
 
-  def self.top_rated(language = api.language)
-    Tmdb::MovieCollection.from_json(Tmdb::Requester.get("movie/top_rated", { language: language }))
+  def self.top_rated(page = 1, language = api.language)
+    Tmdb::MovieCollection.from_json(Tmdb::Requester.get("movie/top_rated", { page: page.to_s, language: language }))
   end
 
-  def self.upcoming(language = api.language)
-    Tmdb::MovieCollection.from_json(Tmdb::Requester.get("movie/upcoming", { language: language }))
+  def self.upcoming(page = 1, language = api.language)
+    Tmdb::MovieCollection.from_json(Tmdb::Requester.get("movie/upcoming", { page: page.to_s, language: language }))
   end
 
 end

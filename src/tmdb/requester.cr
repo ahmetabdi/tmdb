@@ -1,6 +1,6 @@
 class Tmdb::Requester
 
-  def self.get(action, params = { language: nil } of Symbol => String?)
+  def self.get(action, params = { :page => nil, :language => nil } of Symbol => String?)
     url = api.url_for(action, params)
     HTTP::Client.get(url, headers: headers).body
   end

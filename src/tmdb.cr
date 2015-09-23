@@ -11,5 +11,4 @@ module Tmdb
 end
 
 Tmdb.connect("8a221fc31fcdf12a8af827465574ffc9")
-tmdb = Tmdb::Movie.find(52525)
-puts tmdb.credits
+puts Tmdb::Movie.now_playing
