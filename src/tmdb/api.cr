@@ -28,6 +28,7 @@ class Tmdb::Api
 
     uri = URI.parse(@base_url + action)
     uri.query = built_params
+    puts uri
     uri.to_s
   end
 end
