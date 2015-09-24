@@ -24,7 +24,7 @@ class Tmdb::Api
     built_params = CGI.build_form do |form|
       form.add "api_key", INSTANCE.api_key
       params.each do |k,v|
-        form.add "#{k}", "#{v}" unless v
+        form.add "#{k}", "#{v}" unless v.nil?
       end
     end
 
