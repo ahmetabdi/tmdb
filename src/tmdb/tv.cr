@@ -1,5 +1,3 @@
-
-
 class Tmdb::Tv < Tmdb::Resource
 
   json_mapping({

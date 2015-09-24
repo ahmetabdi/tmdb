@@ -11,4 +11,4 @@ module Tmdb
 end
 
 Tmdb.connect("8a221fc31fcdf12a8af827465574ffc9")
-puts Tmdb::Tv.popular.inspect
+puts Tmdb::Configuration.list.inspect
