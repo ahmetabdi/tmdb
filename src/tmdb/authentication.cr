@@ -40,7 +40,7 @@ class Tmdb::Authentication < Tmdb::Resource
   def self.guest_login
     token = Token.from_json(Tmdb::Requester.get("authentication/guest_session/new"))
     if token.success
-      api.session_id = token.guest_session_id
+      api.guest_session_id = token.guest_session_id
       true
     else
       false # TODO: Handle fail better
