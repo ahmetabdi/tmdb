@@ -1,7 +1,7 @@
 class Tmdb::Api
   INSTANCE = new
-  getter api_key, base_url, version, language, session_id
-  setter session_id, api_key, language
+  property session_id, api_key, language
+  getter base_url, version
 
   def initialize
     @base_url = "https://api.themoviedb.org/3/"
