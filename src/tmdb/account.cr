@@ -24,13 +24,13 @@ class Tmdb::Account < Tmdb::Resource
   end
 
   # Get the list of favorite movies for an account.
-  def favorite_movies(page = 1 : Int32, sort_by = 'created_at' : String, language = api.language)
+  def favorite_movies(page = 1 : Int32, sort_by = "created_at" : String, language = api.language)
     Tmdb::Requester.get("account/#{id}/favorite/movies",
       { page: page.to_s, sort_by: sort_by, language: language, session_id: session_id })
   end
 
   # Get the list of favorite TV series for an account.
-  def favorite_tv(page = 1 : Int32, sort_by = 'created_at' : String, language = api.language)
+  def favorite_tv(page = 1 : Int32, sort_by = "created_at" : String, language = api.language)
     Tmdb::Requester.get("account/#{id}/favorite/tv",
       { page: page.to_s, sort_by: sort_by, language: language, session_id: session_id })
   end
@@ -43,31 +43,31 @@ class Tmdb::Account < Tmdb::Resource
   end
 
   # Get the list of rated movies (and associated rating) for an account.
-  def rated_movies(page = 1 : Int32, sort_by = 'created_at' : String, language = api.language)
+  def rated_movies(page = 1 : Int32, sort_by = "created_at" : String, language = api.language)
     Tmdb::Requester.get("account/#{id}/rated/movies",
       { page: page.to_s, sort_by: sort_by, language: language, session_id: session_id })
   end
 
   # Get the list of rated TV shows (and associated rating) for an account.
-  def rated_tv(page = 1 : Int32, sort_by = 'created_at' : String, language = api.language)
+  def rated_tv(page = 1 : Int32, sort_by = "created_at" : String, language = api.language)
     Tmdb::Requester.get("account/#{id}/rated/tv",
       { page: page.to_s, sort_by: sort_by, language: language, session_id: session_id })
   end
 
   # Get the list of rated tv episodes (and associated rating) for an account.
-  def rated_tv_episodes(page = 1 : Int32, sort_by = 'created_at' : String, language = api.language)
+  def rated_tv_episodes(page = 1 : Int32, sort_by = "created_at" : String, language = api.language)
     Tmdb::Requester.get("account/#{id}/rated/tv/episodes",
       { page: page.to_s, sort_by: sort_by, language: language, session_id: session_id })
   end
 
   # Get the list of movies on an accounts watchlist.
-  def watchlist_movies(page = 1 : Int32, sort_by = 'created_at' : String, language = api.language)
+  def watchlist_movies(page = 1 : Int32, sort_by = "created_at" : String, language = api.language)
     Tmdb::Requester.get("account/#{id}/watchlist/movies",
       { page: page.to_s, sort_by: sort_by, language: language, session_id: session_id })
   end
 
   # Get the list of TV series on an accounts watchlist.
-  def watchlist_tv(page = 1 : Int32, sort_by = 'created_at' : String, language = api.language)
+  def watchlist_tv(page = 1 : Int32, sort_by = "created_at" : String, language = api.language)
     Tmdb::Requester.get("account/#{id}/watchlist/tv",
       { page: page.to_s, sort_by: sort_by, language: language, session_id: session_id })
   end

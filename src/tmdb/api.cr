@@ -1,6 +1,7 @@
 class Tmdb::Api
   INSTANCE = new
-  getter api_key, base_url, version, language
+  getter api_key, base_url, version, language, session_id
+  setter session_id, api_key, language
 
   def initialize
     @base_url = "https://api.themoviedb.org/3/"
@@ -10,14 +11,6 @@ class Tmdb::Api
 
   def self.instance
     INSTANCE
-  end
-
-  def language(iso_639_1 : String)
-    @language = iso_639_1
-  end
-
-  def connect(api_key : String)
-    @api_key = api_key
   end
 
   def url_for(action, params)

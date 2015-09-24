@@ -5,10 +5,10 @@ require "./tmdb/*"
 module Tmdb
   def self.connect(api_key)
     Tmdb::Api.instance.tap do |api|
-      api.connect(api_key)
+      api.api_key = api_key
     end
   end
 end
 
 Tmdb.connect("8a221fc31fcdf12a8af827465574ffc9")
-puts Tmdb::Configuration.list.inspect
+puts Tmdb::Authentication.guest_login.inspect
