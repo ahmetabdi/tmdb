@@ -5,6 +5,11 @@ class Tmdb::Requester
     HTTP::Client.get(url, headers: headers).body
   end
 
+  def self.post(action, params = {} of Symbol => String?, body = "")
+    url = api.url_for(action, params)
+    HTTP::Client.post(url, headers: headers, body: body)
+  end
+
   private def self.api
     Tmdb::Api.instance
   end
